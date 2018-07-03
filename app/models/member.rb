@@ -215,7 +215,8 @@ class Member < ActiveRecord::Base
       "name" => self.name,
       "app_activated" => self.app_two_factor.activated?,
       "sms_activated" => self.sms_two_factor.activated?,
-      "memo" => self.id
+      "memo" => self.id,
+      "document_auth" => id_document_verified?
     })
   end
 

@@ -45,6 +45,7 @@ class ApplicationController < ActionController::Base
   end
 
   def auth_verified!
+    return if params[:controller] == "private/funds" && params[:action] == "index" && current_user
     unless current_user and current_user.id_document and current_user.id_document_verified?
       redirect_to settings_path, alert: t('private.settings.index.auth-verified')
     end
@@ -194,7 +195,7 @@ class ApplicationController < ActionController::Base
       memo
     end
     #gon.fiat_currency = Currency.first.code
-    gon.fiat_currency = 'usd'
+    gon.fiat_currency = 'eur'
 
     gon.tickers = {}
     Market.all.each do |market|
